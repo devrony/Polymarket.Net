@@ -177,8 +177,10 @@ services.AddPolymarket(options =>
 });
 ```
 
-
 For information on the clients, dependency injection, response processing and more see the [documentation](https://cryptoexchange.jkorf.dev/client-libs/getting-started), or have a look at the examples [here](https://github.com/JKorf/Polymarket.Net/tree/main/Examples) or [here](https://github.com/JKorf/CryptoExchange.Net/tree/master/Examples).
+
+**NOTE**  
+Polymarket.Net uses the Builder Code mechanism for Polymarket, which means that an additional 1bps / 0.01% fee is charged on top of orders placed with the library to fund development. This is entirely optional and can be disabled in the client options by setting `BuilderCode` to `null` in the REST client options.
 
 ## CryptoExchange.Net
 Polymarket.Net is based on the [CryptoExchange.Net](https://github.com/JKorf/CryptoExchange.Net) base library. Other exchange API implementations based on the CryptoExchange.Net base library are available and follow the same logic.
