@@ -70,7 +70,7 @@ var restClient = new PolymarketRestClient(opts => {
 var credentials = await polymarketRestClient.ClobApi.Account.GetOrCreateApiCredentialsAsync();
 polymarketRestClient.UpdateL2Credentials(credentials.Data);
 
-// Place Limit order to buy 50 shared at 0.1 ($10)
+// Place Limit order to buy 50 shares at 0.1 ($10)
 var tokenIdTest = "67565972075898091709163371829761231762318232475740950317083391526954889294846";
 var result = await polymarketRestClient.ClobApi.Trading.PlaceOrderAsync(
     tokenIdTest, 
@@ -224,34 +224,34 @@ A Discord server is available [here](https://discord.gg/MSpeEtSY8t). For discuss
 
 ## Supported functionality
 
-### REST Central Limit Order Book (CLOB) API
+### REST API
 |API|Supported|Location|
 |--|--:|--|
-|Orderbook|✓|`restClient.ClobApi.ExchangeData`|
-|Pricing|✓|`restClient.ClobApi.ExchangeData`|
-|Spreads|✓|`restClient.ClobApi.ExchangeData`|
-|Historical Timeseries Data|✓|`restClient.ClobApi.ExchangeData`|
-|Order Management|✓|`restClient.ClobApi.Trading`|
-|Trades|✓|`restClient.ClobApi.Trading`|
-
-### REST Gamma API
-|API|Supported|Location|
-|--|--:|--|
-|Sports|✓|`restClient.GammaApi`|
+|Events|✓|`restClient.ClobApi.ExchangeData`|
+|Markets|✓|`restClient.ClobApi.ExchangeData`|
+|Orderbook & Pricing|✓|`restClient.ClobApi.ExchangeData`|
+|Orders|✓|`restClient.ClobApi.Trading` / `restClient.ClobApi.Account`|
+|Trades|✓|`restClient.ClobApi.Trading` / `restClient.ClobApi.Account`|
+|CLOB Markets|✓|`restClient.ClobApi.ExchangeData`|
+|Rebates|X||
+|Rewards|X||
+|Profile|partial|`restClient.DataApi`|
+|Leaderboard|X||
+|Builders|X||
+|Search|✓|`restClient.GammaApi`|
 |Tags|✓|`restClient.GammaApi`|
-|Events|✓|`restClient.GammaApi`|
-|Markets|✓|`restClient.GammaApi`|
 |Series|✓|`restClient.GammaApi`|
 |Comments|X||
-|Profiles|X||
-|Search|✓|`restClient.GammaApi`|
+|Sports|✓|`restClient.GammaApi`|
+|Bridge|X||
+|Relayer|X||
 
-### Websocket API
+### WebSocketocket API
 |API|Supported|Location|
 |--|--:|--|
-|User Channel|✓|`socketClient.ClobApi`|
 |Market Channel|✓|`socketClient.ClobApi`|
-|Sports websocket|✓|`socketClient.ClobApi`|
+|User Channel|✓|`socketClient.ClobApi`|
+|Sport Channel|✓|`socketClient.ClobApi`|
 
 ## Support the project
 Any support is greatly appreciated.
