@@ -60,11 +60,6 @@ namespace Polymarket.Net.Objects.Models
         }
 
         /// <summary>
-        /// ["<c>fee_rate_bps</c>"] Fee rate in BPS
-        /// </summary>
-        [JsonPropertyName("fee_rate_bps")]
-        public decimal FeeRateBps { get; set; }
-        /// <summary>
         /// ["<c>price</c>"] Price
         /// </summary>
         [JsonPropertyName("price")]
