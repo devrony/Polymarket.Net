@@ -407,7 +407,7 @@ namespace Polymarket.Net.Clients.ClobApi
             var parameters = new ParameterCollection();
             parameters.AddOptional("market", market);
             parameters.AddOptional("asset_id", tokenId);
-            var request = _definitions.GetOrCreate(HttpMethod.Delete, "/orders", PolymarketPlatform.RateLimiter.ClobApi, 1, true,
+            var request = _definitions.GetOrCreate(HttpMethod.Delete, "/cancel-market-orders", PolymarketPlatform.RateLimiter.ClobApi, 1, true,
                 limitGuard: new SingleLimitGuard(1000, TimeSpan.FromSeconds(10), RateLimitWindowType.Sliding));
             var result = await _baseClient.SendAsync<PolymarketCancelResult>(request, parameters, ct).ConfigureAwait(false);
             return result;

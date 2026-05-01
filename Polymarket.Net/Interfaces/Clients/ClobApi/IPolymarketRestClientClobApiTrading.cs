@@ -144,7 +144,7 @@ namespace Polymarket.Net.Interfaces.Clients.ClobApi
         /// Docs:<br />
         /// <a href="https://docs.polymarket.com/api-reference/trade/cancel-orders-for-a-market" /><br />
         /// Endpoint:<br />
-        /// DELETE /orders
+        /// DELETE /cancel-market-orders
         /// </para>
         /// </summary>
         /// <param name="marketId">["<c>market</c>"] The condition/market id</param>
