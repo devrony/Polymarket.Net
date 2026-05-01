@@ -269,6 +269,9 @@ Make a one time donation in a crypto currency of your choice. If you prefer to d
 Alternatively, sponsor me on Github using [Github Sponsors](https://github.com/sponsors/JKorf). 
 
 ## Release notes
+* Version 3.0.3 - 01 May 2026
+    * Fixed incorrect makerAddress parameter serialization in GetUserTradesAsync
+
 * Version 3.0.2 - 01 May 2026
     * Improved order placement performance
     * Fixed side parameter missing in PlaceMultipleOrdersAsync endpoint
