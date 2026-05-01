@@ -269,6 +269,13 @@ Make a one time donation in a crypto currency of your choice. If you prefer to d
 Alternatively, sponsor me on Github using [Github Sponsors](https://github.com/sponsors/JKorf). 
 
 ## Release notes
+* Version 3.0.2 - 01 May 2026
+    * Improved order placement performance
+    * Fixed side parameter missing in PlaceMultipleOrdersAsync endpoint
+    * Fixed PlaceMultipleOrdersAsync not sending side parameter
+    * Fixed CancelOrdersOnMarketAsync incorrect endpoint
+    * Fixed restClient.ClobApi.Account.GetBuilderTradesAsync endpoint
+
 * Version 3.0.1 - 29 Apr 2026
     * Removed FeeRateBps from PolymarketOrderBase model fixing deserialization exception in websocket user updates
 
