@@ -42,7 +42,8 @@ namespace Polymarket.Net.Objects.Options
         /// <summary>
         /// Builder code
         /// </summary>
-        public string? BuilderCode { get; set; } = "0x7df2c024a68a29ed44b35d40ede5ef8e7d2ad7f4a8c9bf687735a7c2e005635b";
+        //public string? BuilderCode { get; set; } = "0x7df2c024a68a29ed44b35d40ede5ef8e7d2ad7f4a8c9bf687735a7c2e005635b";
+        public string? BuilderCode { get; set; } = ""; // Removed hard-coded Builder for Github Developers until confirming this can be overwritten
 
         internal PolymarketRestOptions Set(PolymarketRestOptions targetOptions)
         {
