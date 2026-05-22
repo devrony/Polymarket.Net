@@ -138,7 +138,13 @@ namespace Polymarket.Net.Clients.ClobApi
             var parameterList = new List<ParameterCollection>();
             foreach (var request in requests)
             {
-                var tokenInfo = tokenResult.Data.Single(x => x.TokenId == request.TokenId);
+                var tokenInfo = tokenResult.Data.SingleOrDefault(x => x.TokenId == request.TokenId);
+                if (tokenInfo == null)
+                {
+                    return new WebCallResult<CallResult<PolymarketOrderResult>[]>(
+                        new ServerError(new ErrorInfo(ErrorType.UnknownSymbol, $"Token {request.TokenId} not found")));
+                }
+
                 var makerTakerQuantities = GetMakerTakerQuantities(request.TokenId, request.Side, request.OrderType, request.Quantity, request.Price, request.TimeInForce, tokenInfo.TickQuantity, request.QuantityType ?? QuantityType.Shares, tokenInfo);
                 if (!makerTakerQuantities)
                     return new WebCallResult<CallResult<PolymarketOrderResult>[]>(makerTakerQuantities.Error);

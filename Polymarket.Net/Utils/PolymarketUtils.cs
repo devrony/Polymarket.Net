@@ -1,4 +1,5 @@
 ﻿using CryptoExchange.Net.Objects;
+using CryptoExchange.Net.Objects.Errors;
 using Polymarket.Net.Interfaces.Clients.ClobApi;
 using Polymarket.Net.Objects.Models;
 using System;
@@ -37,7 +38,17 @@ namespace Polymarket.Net.Utils
                 }
 
                 var result = await UpdateTokenInfoAsync(envName, [tokenId], client).ConfigureAwait(false);
-                return result ? new CallResult<PolymarketOrderBook>(result.Data.First(x => x.TokenId == tokenId)) : new CallResult<PolymarketOrderBook>(result.Error!);
+                if (!result)
+                    return result.As<PolymarketOrderBook>(default);
+
+                var token = result.Data.FirstOrDefault(x => x.TokenId == tokenId);
+                if (token == null)
+                {
+                    return new CallResult<PolymarketOrderBook>(
+                        new ServerError(new ErrorInfo(ErrorType.UnknownSymbol, $"Token {tokenId} not found")));
+                }
+
+                return new CallResult<PolymarketOrderBook>(token);
             }
             finally
             {
