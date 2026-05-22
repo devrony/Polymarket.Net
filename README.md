@@ -310,6 +310,10 @@ Make a one time donation in a crypto currency of your choice. If you prefer to d
 Alternatively, sponsor me on Github using [Github Sponsors](https://github.com/sponsors/JKorf). 
 
 ## Release notes
+* Version 3.2.0 - 22 May 2026
+    * Added FeeSchedule to PolymarketGammaMarket model
+    * Added checks for unknown token ids to prevent exception throwing
+
 * Version 3.1.0 - 09 May 2026
     * Added support for Poly1271 signing
 
