@@ -42,7 +42,7 @@ namespace Polymarket.Net.Objects.Sockets.Subscriptions
         /// <inheritdoc />
         protected override Query? GetSubQuery(SocketConnection connection)
         {
-            return new PolymarketInitialQuery<object>("MARKET");
+            return new PolymarketInitialQuery<object>("MARKET", true);
         }
 
         /// <inheritdoc />
