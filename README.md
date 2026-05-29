@@ -311,6 +311,10 @@ Make a one time donation in a crypto currency of your choice. If you prefer to d
 Alternatively, sponsor me on Github using [Github Sponsors](https://github.com/sponsors/JKorf). 
 
 ## Release notes
+* Version 3.4.0 - 29 May 2026
+    * Added restClient.GammaApi.GetEventsKeysetPaginationAsync
+    * Fixed incorrect time parameter serialization Gamma API
+
 * Version 3.3.1 - 28 May 2026
     * Fixed SubscribeToPlatformUpdatesAsync not correctly subscribing to events
 

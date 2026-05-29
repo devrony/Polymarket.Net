@@ -4,8 +4,8 @@
 
 Polymarket.Net is a strongly typed .NET client library for the Polymarket REST and WebSocket APIs. It is part of the CryptoExchange.Net ecosystem and uses the same result, logging, rate limiting, dependency injection, and socket patterns as the other JKorf client libraries.
 
-Current package version in this repository: 3.1.0.
-CryptoExchange.Net dependency: 11.1.1.
+Current package version in this repository: 3.4.0.
+CryptoExchange.Net dependency: 11.2.0.
 Target frameworks: netstandard2.0, netstandard2.1, net8.0, net9.0, net10.0.
 Native AOT: supported on compatible .NET targets.
 
@@ -378,6 +378,7 @@ Get Gamma markets -> client.GammaApi.GetMarketsAsync(...)
 Get Gamma market by id -> client.GammaApi.GetMarketByIdAsync(id)
 Get Gamma market by slug -> client.GammaApi.GetMarketBySlugAsync(slug)
 Get events -> client.GammaApi.GetEventsAsync(...)
+Get keyset-paginated events -> client.GammaApi.GetEventsKeysetPaginationAsync(...)
 Get event by id -> client.GammaApi.GetEventByIdAsync(id)
 Get event by slug -> client.GammaApi.GetEventBySlugAsync(slug)
 Get tags -> client.GammaApi.GetTagsAsync(...)
