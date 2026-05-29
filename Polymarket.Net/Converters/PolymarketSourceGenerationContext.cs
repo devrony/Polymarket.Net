@@ -24,6 +24,7 @@ namespace Polymarket.Net.Converters
     [JsonSerializable(typeof(PolymarketSeries[]))]
     [JsonSerializable(typeof(PolymarketGammaMarket))]
     [JsonSerializable(typeof(PolymarketGammaMarket[]))]
+    [JsonSerializable(typeof(PolymarketEventPage))]
     [JsonSerializable(typeof(PolymarketEvent[]))]
     [JsonSerializable(typeof(PolymarketRelatedTag[]))]
     [JsonSerializable(typeof(PolymarketTag))]
