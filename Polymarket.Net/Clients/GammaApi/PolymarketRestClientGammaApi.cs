@@ -248,6 +248,96 @@ namespace Polymarket.Net.Clients.GammaApi
         #region Get Events
 
         /// <inheritdoc />
+        public async Task<WebCallResult<PolymarketEventPage>> GetEventsKeysetPaginationAsync(
+            long[]? ids = null,
+            long[]? tagIds = null,
+            long[]? excludeTagIds = null,
+            string[]? slugs = null,
+            string? tagSlug = null,
+            bool? relatedTags = null,
+            bool? closed = null,
+            bool? live = null,
+            bool? featured = null,
+            bool? cyom = null,
+            string? titleSearch = null,
+            decimal? liquidityMin = null,
+            decimal? liquidityMax = null,
+            decimal? volumeMin = null,
+            decimal? volumeMax = null,
+            DateTime? startDateMin = null,
+            DateTime? startDateMax = null,
+            DateTime? endDateMin = null,
+            DateTime? endDateMax = null,
+            DateTime? startTimeMin = null,
+            DateTime? startTimeMax = null,
+            long[]? seriesIds = null,
+            long[]? gameIds = null,
+            DateTime? eventDate = null,
+            int? eventWeek = null,
+            bool? featuredOrder = null,
+            string? recurrence = null,
+            string[]? createdBy = null,
+            long? parentEventId = null,
+            bool? includeChildren = null,
+            string? partnerSlug = null,
+            bool? includeChat = null,
+            bool? includeTemplate = null,
+            bool? includeBestLines = null,
+            string? locale = null,
+            int? limit = null,
+            string? afterCursor = null,
+            IEnumerable<string>? orderBy = null,
+            bool? ascending = null,
+            CancellationToken ct = default)
+        {
+            var parameters = new ParameterCollection();
+            parameters.AddOptional("id", ids);
+            parameters.AddOptional("tag_id", tagIds);
+            parameters.AddOptional("exclude_tag_id", excludeTagIds);
+            parameters.AddOptional("slug", slugs);
+            parameters.AddOptional("tag_slug", tagSlug);
+            parameters.AddOptionalBoolString("related_tags", relatedTags);
+            parameters.AddOptionalBoolString("closed", closed);
+            parameters.AddOptionalBoolString("live", live);
+            parameters.AddOptionalBoolString("featured", featured);
+            parameters.AddOptionalBoolString("cyom", cyom);
+            parameters.AddOptional("title_search", titleSearch);
+            parameters.AddOptionalString("liquidity_min", liquidityMin);
+            parameters.AddOptionalString("liquidity_max", liquidityMax);
+            parameters.AddOptionalString("volume_min", volumeMin);
+            parameters.AddOptionalString("volume_max", volumeMax);
+            parameters.AddOptionalString("start_date_min", startDateMin);
+            parameters.AddOptionalString("start_date_max", startDateMax);
+            parameters.AddOptionalString("end_date_min", endDateMin);
+            parameters.AddOptionalString("end_date_max", endDateMax);
+            parameters.AddOptionalString("start_time_min", startTimeMin);
+            parameters.AddOptionalString("start_time_max", startTimeMax);
+            parameters.AddOptional("series_id", seriesIds);
+            parameters.AddOptional("game_id", gameIds);
+            parameters.AddOptionalString("event_date", eventDate);
+            parameters.AddOptional("event_week", eventWeek);
+            parameters.AddOptionalBoolString("featured_order", featuredOrder);
+            parameters.AddOptional("recurrence", recurrence);
+            parameters.AddOptional("created_by", createdBy);
+            parameters.AddOptional("parent_event_id", parentEventId);
+            parameters.AddOptionalBoolString("include_children", includeChildren);
+            parameters.AddOptional("partner_slug", partnerSlug);
+            parameters.AddOptionalBoolString("include_chat", includeChat);
+            parameters.AddOptionalBoolString("include_template", includeTemplate);
+            parameters.AddOptionalBoolString("include_best_lines", includeBestLines);
+            parameters.AddOptional("locale", locale);
+            parameters.AddOptional("after_cursor", afterCursor);
+            parameters.AddOptionalCommaSeparated("order", orderBy);
+            parameters.AddOptionalBoolString("ascending", ascending);
+            parameters.Add("limit", limit ?? 20);
+
+            var request = _definitions.GetOrCreate(HttpMethod.Get, $"events/keyset", PolymarketPlatform.RateLimiter.GammaApi, 1, false,
+                limitGuard: new SingleLimitGuard(500, TimeSpan.FromSeconds(10), RateLimitWindowType.Sliding));
+            return await SendAsync<PolymarketEventPage>(request, parameters, ct).ConfigureAwait(false);
+        }
+
+
+        /// <inheritdoc />
         public async Task<WebCallResult<PolymarketEvent[]>> GetEventsAsync(
             long[]? ids = null,
             long? tagId = null,
