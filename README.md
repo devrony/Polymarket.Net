@@ -311,6 +311,26 @@ Make a one time donation in a crypto currency of your choice. If you prefer to d
 Alternatively, sponsor me on Github using [Github Sponsors](https://github.com/sponsors/JKorf). 
 
 ## Release notes
+* Version 4.0.0 - 29 Jun 2026
+    * Result types:
+      * (Web)CallResult types are replaced by HttpResult and WebSocketResult with the same logic
+      * WebSocketResult now return additional info for websocket operations
+      * Updated result types to record type
+      * Removed implicit result type conversion to bool, `if (result)` no longer works, instead use `if (result.Success)`
+      * Fixed result object nullability hinting, for example Data might be null if Success isn't checked for true
+    * Clients:
+      * Added ToString overrides on base API types
+      * Added Exchange property on BaseApiClient
+      * Added ApiCredentials property on Api clients
+      * Updated ILogger source from client name to topic specific client name
+      * Removed logging from client creation
+      * Fixed issue in SocketApiClient.GetSocketConnection causing requests to always wait the full max 10 seconds when there was a reconnecting socket
+    * Added bypass of order book request for place order if possible
+    * Added SupportedEnvironments property to PlatformInfo
+    * Added setter to PolymarketPlatform.RateLimiter to allow custom rate limit settings
+    * Various small performance improvements
+    * Fixed websocket connection attempts counting towards rate limit even when server could not be reached
+
 * Version 3.5.0 - 08 Jun 2026
     * Updated CryptoExchange.Net to version 11.2.2
     * Fixed user client provider not caching new client when previous client was disposed
