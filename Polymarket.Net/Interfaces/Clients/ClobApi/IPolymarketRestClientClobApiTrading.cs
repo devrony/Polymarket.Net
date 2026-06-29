@@ -27,7 +27,7 @@ namespace Polymarket.Net.Interfaces.Clients.ClobApi
         /// <param name="tokenId">Asset/token id</param>
         /// <param name="cursor">Next page cursor</param>
         /// <param name="ct">Cancellation token</param>
-        Task<WebCallResult<PolymarketPage<PolymarketOrder>>> GetOpenOrdersAsync(string? orderId = null, string? marketId = null, string? tokenId = null, string? cursor = null, CancellationToken ct = default);
+        Task<HttpResult<PolymarketPage<PolymarketOrder>>> GetOpenOrdersAsync(string? orderId = null, string? marketId = null, string? tokenId = null, string? cursor = null, CancellationToken ct = default);
 
         /// <summary>
         /// Get an order by id
@@ -40,7 +40,7 @@ namespace Polymarket.Net.Interfaces.Clients.ClobApi
         /// </summary>
         /// <param name="orderId">["<c>order_id</c>"] Order id</param>
         /// <param name="ct">Cancellation token</param>
-        Task<WebCallResult<PolymarketOrder>> GetOrderAsync(string orderId, CancellationToken ct = default);
+        Task<HttpResult<PolymarketOrder>> GetOrderAsync(string orderId, CancellationToken ct = default);
 
         /// <summary>
         /// Check if an order is eligible or scoring for Rewards purposes
@@ -53,7 +53,7 @@ namespace Polymarket.Net.Interfaces.Clients.ClobApi
         /// </summary>
         /// <param name="orderId">Order id</param>
         /// <param name="ct">Cancellation token</param>
-        Task<WebCallResult<PolymarketOrderScoring>> GetOrderRewardScoringAsync(string orderId, CancellationToken ct = default);
+        Task<HttpResult<PolymarketOrderScoring>> GetOrderRewardScoringAsync(string orderId, CancellationToken ct = default);
 
         /// <summary>
         /// Check if orders are eligible or scoring for Rewards purposes
@@ -66,7 +66,7 @@ namespace Polymarket.Net.Interfaces.Clients.ClobApi
         /// </summary>
         /// <param name="orderIds">Order ids</param>
         /// <param name="ct">Cancellation token</param>
-        Task<WebCallResult<Dictionary<string, bool>>> GetOrdersRewardScoringAsync(IEnumerable<string> orderIds, CancellationToken ct = default);
+        Task<HttpResult<Dictionary<string, bool>>> GetOrdersRewardScoringAsync(IEnumerable<string> orderIds, CancellationToken ct = default);
 
         /// <summary>
         /// Place a new order
@@ -87,8 +87,10 @@ namespace Polymarket.Net.Interfaces.Clients.ClobApi
         /// <param name="clientOrderId">["<c>order.salt</c>"] Client order id</param>
         /// <param name="expiration">["<c>order.expiration</c>"] Expiration time</param>
         /// <param name="quantityType">Type of quantity for an order, either in shares (default) or in value (USD). Value is only available for market buy orders</param>
+        /// <param name="tickQuantity">Tick quantity, can be provided together with negative risk to bypass token info retrieval for limit orders</param>
+        /// <param name="negativeRisk">If negative risk token, can be provided together with tickQuantity to bypass token info retrieval for limit orders</param>
         /// <param name="ct">Cancellation token</param>
-        Task<WebCallResult<PolymarketOrderResult>> PlaceOrderAsync(
+        Task<HttpResult<PolymarketOrderResult>> PlaceOrderAsync(
             string tokenId,
             OrderSide side,
             OrderType orderType,
@@ -99,6 +101,8 @@ namespace Polymarket.Net.Interfaces.Clients.ClobApi
             long? clientOrderId = null,
             DateTime? expiration = null,
             QuantityType? quantityType = null,
+            decimal? tickQuantity = null,
+            bool? negativeRisk = null,
             CancellationToken ct = default);
 
         /// <summary>
@@ -112,7 +116,7 @@ namespace Polymarket.Net.Interfaces.Clients.ClobApi
         /// </summary>
         /// <param name="requests">Order requests</param>
         /// <param name="ct">Cancellation token</param>
-        Task<WebCallResult<CallResult<PolymarketOrderResult>[]>> PlaceMultipleOrdersAsync(IEnumerable<PolymarketOrderRequest> requests, CancellationToken ct = default);
+        Task<HttpResult<CallResult<PolymarketOrderResult>[]>> PlaceMultipleOrdersAsync(IEnumerable<PolymarketOrderRequest> requests, CancellationToken ct = default);
 
         /// <summary>
         /// Cancel an order
@@ -125,7 +129,7 @@ namespace Polymarket.Net.Interfaces.Clients.ClobApi
         /// </summary>
         /// <param name="orderId">["<c>orderID</c>"] Order id</param>
         /// <param name="ct">Cancellation token</param>
-        Task<WebCallResult<PolymarketCancelResult>> CancelOrderAsync(string orderId, CancellationToken ct = default);
+        Task<HttpResult<PolymarketCancelResult>> CancelOrderAsync(string orderId, CancellationToken ct = default);
         /// <summary>
         /// Cancel multiple orders
         /// <para>
@@ -137,7 +141,7 @@ namespace Polymarket.Net.Interfaces.Clients.ClobApi
         /// </summary>
         /// <param name="orderIds">Ids of orders to cancel</param>
         /// <param name="ct">Cancellation token</param>
-        Task<WebCallResult<PolymarketCancelResult>> CancelOrdersAsync(IEnumerable<string> orderIds, CancellationToken ct = default);
+        Task<HttpResult<PolymarketCancelResult>> CancelOrdersAsync(IEnumerable<string> orderIds, CancellationToken ct = default);
         /// <summary>
         /// Cancel all orders for a specific market
         /// <para>
@@ -150,7 +154,7 @@ namespace Polymarket.Net.Interfaces.Clients.ClobApi
         /// <param name="marketId">["<c>market</c>"] The condition/market id</param>
         /// <param name="tokenId">["<c>asset_id</c>"] Asset/token id</param>
         /// <param name="ct">Cancellation token</param>
-        Task<WebCallResult<PolymarketCancelResult>> CancelOrdersOnMarketAsync(string? marketId = null, string? tokenId = null, CancellationToken ct = default);
+        Task<HttpResult<PolymarketCancelResult>> CancelOrdersOnMarketAsync(string? marketId = null, string? tokenId = null, CancellationToken ct = default);
         /// <summary>
         /// Cancel all open orders
         /// <para>
@@ -161,7 +165,7 @@ namespace Polymarket.Net.Interfaces.Clients.ClobApi
         /// </para>
         /// </summary>
         /// <param name="ct">Cancellation token</param>
-        Task<WebCallResult<PolymarketCancelResult>> CancelAllOrdersAsync(CancellationToken ct = default);
+        Task<HttpResult<PolymarketCancelResult>> CancelAllOrdersAsync(CancellationToken ct = default);
 
         /// <summary>
         /// Get trades matching the filters
@@ -180,7 +184,7 @@ namespace Polymarket.Net.Interfaces.Clients.ClobApi
         /// <param name="endTime">["<c>before</c>"] Filter by end time</param>
         /// <param name="cursor">["<c>next_cursor</c>"] Next page cursor</param>
         /// <param name="ct">Cancellation token</param>
-        Task<WebCallResult<PolymarketPage<PolymarketTrade>>> GetUserTradesAsync(
+        Task<HttpResult<PolymarketPage<PolymarketTrade>>> GetUserTradesAsync(
             string? tradeId = null,
             string? makerAddress = null,
             string? marketId = null,
@@ -200,6 +204,6 @@ namespace Polymarket.Net.Interfaces.Clients.ClobApi
         /// </para>
         /// </summary>
         /// <param name="ct">Cancellation token</param>
-        Task<WebCallResult> PostOrderHeartbeatAsync(CancellationToken ct = default);
+        Task<HttpResult> PostOrderHeartbeatAsync(CancellationToken ct = default);
     }
 }
