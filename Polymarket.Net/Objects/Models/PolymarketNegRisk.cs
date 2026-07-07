@@ -17,5 +17,10 @@ namespace Polymarket.Net.Objects.Models
         /// </summary>
         [JsonPropertyName("neg-risk")]
         public bool NegativeRisk { get; set; }
+        [JsonInclude, JsonPropertyName("neg_risk")]
+        internal bool NegativeRiskInt
+        {
+            set => NegativeRisk = value;
+        }
     }
 }
