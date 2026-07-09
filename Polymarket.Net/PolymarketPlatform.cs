@@ -29,7 +29,7 @@ namespace Polymarket.Net
         {
             Sort = false,
             Decimal = DecimalSerialization.String,
-            DateTimes = DateTimeSerialization.MillisecondsString,
+            DateTimes = DateTimeSerialization.Rfc3339String,
             Bool = BoolSerialization.String,
             Array = ArrayParametersSerialization.MultipleValues
         };
