@@ -41,6 +41,8 @@ namespace Polymarket.Net.Clients.ClobApi
         {
             { 0.1m, new RoundingConfig { Price = 1, Size = 2, Amount = 3 } },
             { 0.01m, new RoundingConfig { Price = 2, Size = 2, Amount = 4 } },
+            { 0.005m, new RoundingConfig { Price = 2, Size = 3, Amount = 5 } },
+            { 0.0025m, new RoundingConfig { Price = 4, Size = 2, Amount = 6 } },
             { 0.001m, new RoundingConfig { Price = 3, Size = 2, Amount = 5 } },
             { 0.0001m, new RoundingConfig { Price = 4, Size = 2, Amount = 6 } },
         };
