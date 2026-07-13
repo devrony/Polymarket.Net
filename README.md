@@ -312,6 +312,9 @@ Make a one time donation in a crypto currency of your choice. If you prefer to d
 Alternatively, sponsor me on Github using [Github Sponsors](https://github.com/sponsors/JKorf). 
 
 ## Release notes
+* Version 4.1.2 - 13 Jul 2026
+    * Added restClient.ClobApi.ExchangeData.GetPriceHistoriesAsync endpoint
+
 * Version 4.1.1 - 11 Jul 2026
     * Updated CryptoExchange.Net to version 12.1.1 to fix deserialization issue for certain timestamps
     * Fixed GetOrderBookAsync deserialization if there is no trade price
