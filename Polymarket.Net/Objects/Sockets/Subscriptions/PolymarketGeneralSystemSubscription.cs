@@ -19,27 +19,27 @@ namespace Polymarket.Net.Objects.Sockets.Subscriptions
         public PolymarketGeneralSystemSubscription(ILogger logger) : base(logger, false)
         {
             MessageRouter = MessageRouter.Create([
-                MessageRoute<PolymarketNewMarketUpdate>.CreateWithoutTopicFilter("new_market", DoHandleMessage),
-                MessageRoute<PolymarketNewMarketUpdate>.CreateWithoutTopicFilter("market_resolved", DoHandleMessage)
+                MessageRoute.CreateForEvent<PolymarketNewMarketUpdate>("new_market", DoHandleMessage),
+                MessageRoute.CreateForEvent<PolymarketNewMarketUpdate>("market_resolved", DoHandleMessage)
                 ]);
         }
 
         /// <inheritdoc />
         protected override Query? GetSubQuery(SocketConnection connection)
         {
-            return new PolymarketInitialQuery<object>("MARKET");
+            return new PolymarketInitialQuery<object>("MARKET", true);
         }
 
         /// <inheritdoc />
         public CallResult DoHandleMessage(SocketConnection connection, DateTime receiveTime, string? originalData, PolymarketNewMarketUpdate message)
         {
-            return CallResult.SuccessResult;
+            return CallResult.Ok();
         }
 
         /// <inheritdoc />
         public CallResult DoHandleMessage(SocketConnection connection, DateTime receiveTime, string? originalData, PolymarketMarketResolvedUpdate message)
         {
-            return CallResult.SuccessResult;
+            return CallResult.Ok();
         }
     }
 }

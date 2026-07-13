@@ -10,10 +10,10 @@ namespace Polymarket.Net.Objects.Sockets
 {
     internal class PolymarketInitialQuery<T> : Query<T>
     {
-        public PolymarketInitialQuery(string type, string? key = null, string? sec = null, string? pass = null) : base(new PolymarketSocketInitialRequest
+        public PolymarketInitialQuery(string type, bool customFeatureEnabled, string? key = null, string? sec = null, string? pass = null) : base(new PolymarketSocketInitialRequest
         {
             Type = type,
-            CustomFeatureEnabled = key != null ? true : null,
+            CustomFeatureEnabled = customFeatureEnabled,
             Auth = key == null ? null : new PolymarketSocketAuth
             {
                 ApiKey = key,
@@ -24,7 +24,7 @@ namespace Polymarket.Net.Objects.Sockets
         {
             ExpectsResponse = false;
 
-            MessageRouter = MessageRouter.CreateWithoutHandler<T>("");
+            MessageRouter = MessageRouter.CreateVoid<T>("");
         }
     }
 }

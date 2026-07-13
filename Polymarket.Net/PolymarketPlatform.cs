@@ -19,7 +19,21 @@ namespace Polymarket.Net
     public static class PolymarketPlatform
     {
         internal static JsonSerializerOptions _serializerContext = SerializerOptions.WithConverters(JsonSerializerContextCache.GetOrCreate<PolymarketSourceGenerationContext>());
-        
+        internal static ParameterSerializationSettings _parameterSerializationSettings = new ParameterSerializationSettings
+        {
+            Sort = false,
+            Decimal = DecimalSerialization.String,
+            DateTimes = DateTimeSerialization.MillisecondsString
+        };
+        internal static ParameterSerializationSettings _gammaParameterSerializationSettings = new ParameterSerializationSettings
+        {
+            Sort = false,
+            Decimal = DecimalSerialization.String,
+            DateTimes = DateTimeSerialization.Rfc3339String,
+            Bool = BoolSerialization.String,
+            Array = ArrayParametersSerialization.MultipleValues
+        };
+
         /// <summary>
         /// Platform metadata
         /// </summary>
@@ -30,13 +44,14 @@ namespace Polymarket.Net
                 "https://www.polymarket.com",
                 ["https://docs.polymarket.com/api-reference"],
                 PlatformType.PredictionMarket,
-                CentralizationType.Decentralized
+                CentralizationType.Decentralized,
+                PolymarketEnvironment.All
                 );
 
         /// <summary>
         /// Rate limiter configuration for the Polymarket API
         /// </summary>
-        public static PolymarketRateLimiters RateLimiter { get; } = new PolymarketRateLimiters();
+        public static PolymarketRateLimiters RateLimiter { get; set; } = new PolymarketRateLimiters();
     }
 
     /// <summary>
@@ -54,13 +69,19 @@ namespace Polymarket.Net
         public event Action<RateLimitUpdateEvent> RateLimitUpdated;
 
 #pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
-        internal PolymarketRateLimiters()
+        /// <summary>
+        /// ctor
+        /// </summary>
+        public PolymarketRateLimiters()
 #pragma warning restore CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
         {
             Initialize();
         }
 
-        private void Initialize()
+        /// <summary>
+        /// Initialize the rate limits
+        /// </summary>
+        protected virtual void Initialize()
         {
             ClobApi = new RateLimitGate("Clob")
                 .AddGuard(new RateLimitGuard(RateLimitGuard.PerHost, new LimitItemTypeFilter(RateLimitItemType.Request), 9000, TimeSpan.FromSeconds(10), RateLimitWindowType.Sliding)); // 9000 requests per 10 seconds
