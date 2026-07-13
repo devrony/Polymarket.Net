@@ -174,6 +174,23 @@ namespace Polymarket.Net.Interfaces.Clients.ClobApi
         Task<HttpResult<PolymarketPriceHistory[]>> GetPriceHistoryAsync(string market, DateTime? startTime = null, DateTime? endTime = null, DataInterval? interval = null, int? fidelity = null, CancellationToken ct = default);
 
         /// <summary>
+        /// Get price history for multiple markets
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://docs.polymarket.com/api-reference/markets/get-prices-history" /><br />
+        /// Endpoint:<br />
+        /// GET /prices-history
+        /// </para>
+        /// </summary>
+        /// <param name="markets">["<c>markets</c>"] The markets to get history for</param>
+        /// <param name="startTime">["<c>startTs</c>"] Filter by start time</param>
+        /// <param name="endTime">["<c>endTs</c>"] Filter by end time</param>
+        /// <param name="interval">["<c>interval</c>"] Interval</param>
+        /// <param name="fidelity">["<c>fidelity</c>"] Fidelity in minutes</param>
+        /// <param name="ct">Cancellation token</param>
+        Task<HttpResult<PolymarketPriceHistories>> GetPriceHistoriesAsync(IEnumerable<string> markets, DateTime? startTime = null, DateTime? endTime = null, DataInterval? interval = null, int? fidelity = null, CancellationToken ct = default);
+
+        /// <summary>
         /// Get bid/ask spread for a a token
         /// <para>
         /// Docs:<br />

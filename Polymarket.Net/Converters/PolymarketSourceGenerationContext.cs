@@ -38,6 +38,7 @@ namespace Polymarket.Net.Converters
     [JsonSerializable(typeof(PolymarketPriceRequest[]))]
     [JsonSerializable(typeof(PolymarketMidPrice))]
     [JsonSerializable(typeof(PolymarketPriceHistoryWrapper[]))]
+    [JsonSerializable(typeof(PolymarketPriceHistories))]
     [JsonSerializable(typeof(Dictionary<string, decimal>))]
     [JsonSerializable(typeof(PolymarketTokenRequest[]))]
     [JsonSerializable(typeof(PolymarketOrderBook))]

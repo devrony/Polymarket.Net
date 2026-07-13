@@ -205,6 +205,25 @@ namespace Polymarket.Net.Clients.ClobApi
 
         #endregion
 
+        #region Get Price History
+
+        /// <inheritdoc />
+        public async Task<HttpResult<PolymarketPriceHistories>> GetPriceHistoriesAsync(IEnumerable<string> markets, DateTime? startTime = null, DateTime? endTime = null, DataInterval? interval = null, int? fidelity = null, CancellationToken ct = default)
+        {
+            var parameters = new Parameters(PolymarketPlatform._parameterSerializationSettings);
+            parameters.AddArray("markets", markets);
+            parameters.Add("startTs", startTime);
+            parameters.Add("endTs", endTime);
+            parameters.Add("interval", interval);
+            parameters.Add("fidelity", fidelity);
+            var request = _definitions.GetOrCreate(HttpMethod.Post, _baseClient.BaseAddress, "/batch-prices-history", PolymarketPlatform.RateLimiter.ClobApi, 1, false,
+                limitGuard: new SingleLimitGuard(1000, TimeSpan.FromSeconds(10), RateLimitWindowType.Sliding));
+            var result = await _baseClient.SendAsync<PolymarketPriceHistories>(request, parameters, ct).ConfigureAwait(false);
+            return result;
+        }
+
+        #endregion
+
         #region Get Bid Ask Spread
 
         /// <inheritdoc />

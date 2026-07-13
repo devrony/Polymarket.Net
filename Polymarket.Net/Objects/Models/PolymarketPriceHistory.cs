@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Text.Json.Serialization;
 
 namespace Polymarket.Net.Objects.Models
@@ -11,6 +12,19 @@ namespace Polymarket.Net.Objects.Models
         [JsonPropertyName("history")]
         public PolymarketPriceHistory[] History { get; set; } = [];
     }
+
+    /// <summary>
+    /// Price histories
+    /// </summary>
+    public record PolymarketPriceHistories
+    {
+        /// <summary>
+        /// ["<c>history</c>"] History
+        /// </summary>
+        [JsonPropertyName("history")]
+        public Dictionary<string, PolymarketPriceHistory[]> History { get; set; } = new();
+    }
+
 
     /// <summary>
     /// Price history
